@@ -1,0 +1,37 @@
+using System.Numerics;
+using UnityEditorInternal;
+using UnityEngine;
+
+public class NewMonoBehaviourScript : MonoBehaviour
+{
+    private UnityEngine.Vector3 targetPosition;
+
+    private void Update()
+    {   
+        float stoppingDistance = 0.1f; // Distance to stop moving towards the target position
+        if (UnityEngine.Vector3.Distance(transform.position, targetPosition) > stoppingDistance)
+        {
+            // Move towards the target position
+            UnityEngine.Vector3 moveDirection = (targetPosition - transform.position).normalized;
+            float moveSpeed = 5f; // Speed of the unit
+            transform.position += moveSpeed * Time.deltaTime * moveDirection; // Move at a speed of 5 units per second
+        }
+     
+        if (Input.GetMouseButtonDown(0))
+        {   
+
+            if (targetPosition != null)
+            {
+           
+                Move(MouseWorld.GetPosition());
+            }
+            
+            
+        }
+    }
+    private void Move(UnityEngine.Vector3 targetPostion)
+    {
+        this.targetPosition = targetPostion;
+    }
+   
+}
